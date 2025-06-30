@@ -4,6 +4,7 @@ namespace SharedResources;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\File;
+use SharedResources\Modules\User\UserRepositoryServiceProvider;
 
 class SharedResourceServiceProvider extends ServiceProvider
 {
@@ -34,7 +35,7 @@ class SharedResourceServiceProvider extends ServiceProvider
             }
 
             // Migrations
-            $migrationPath = $moduleDir . '/Database/migrations';
+            $migrationPath = $moduleDir . '/Database/Migrations';
             if (is_dir($migrationPath)) {
                 $this->loadMigrationsFrom($migrationPath);
             }
@@ -45,7 +46,7 @@ class SharedResourceServiceProvider extends ServiceProvider
 
     public function register()
     {
-        //
+        $this->app->register(UserRepositoryServiceProvider::class);
     }
 }
 
