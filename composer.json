@@ -12,7 +12,7 @@
   "extra": {
     "laravel": {
       "providers": [
-        "SharedResource\\SharedResourceServiceProvider"
+        "SharedResources\\SharedResourceServiceProvider"
       ]
     }
   },
