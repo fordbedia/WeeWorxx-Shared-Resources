@@ -1,6 +1,6 @@
 <?php
 
-namespace SharedResource;
+namespace SharedResources;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\File;
