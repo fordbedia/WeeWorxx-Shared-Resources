@@ -1,0 +1,22 @@
+{
+  "name": "weeworxx/shared-resource",
+  "type": "library",
+  "autoload": {
+    "psr-4": {
+      "SharedResource\\": "src/"
+    },
+    "files": [
+      "src/SDK/helpers.php"
+    ]
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "SharedResource\\SharedResourceServiceProvider"
+      ]
+    }
+  },
+  "require": {
+    "php": "^8.1"
+  }
+}
