@@ -1,5 +1,5 @@
 {
-  "name": "weeworxx/shared-resource",
+  "name": "weeworxx/shared-resources",
   "description": "Shared Laravel module with modular support for User, Post, Comments, etc.",
   "type": "library",
   "version": "dev-master",
