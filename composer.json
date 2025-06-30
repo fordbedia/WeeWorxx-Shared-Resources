@@ -2,7 +2,7 @@
   "name": "weeworxx/shared-resource",
   "description": "Shared Laravel module with modular support for User, Post, Comments, etc.",
   "type": "library",
-  "version": "dev-main",
+  "version": "dev-master",
   "license": "MIT",
   "autoload": {
     "psr-4": {
