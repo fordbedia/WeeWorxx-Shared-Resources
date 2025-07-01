@@ -4,7 +4,7 @@ namespace WeeWorxxSDK\SharedResources\SDK\Console\Config;
 
 use Illuminate\Support\Facades\File;
 
-class MakeAnythingCommand extends ModularMakeCommand
+class Make extends ModularMakeCommand
 {
     protected $signature = 'ww:make {what} {className}
         {--module= : Module Name}

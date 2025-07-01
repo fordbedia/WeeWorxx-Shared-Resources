@@ -1,6 +1,8 @@
 <?php
 namespace WeeWorxxSDK\SharedResources\SDK\Console\Helpers\Traits;
 
+use WeeWorxxSDK\SharedResources\SDK\WeeWorxxApp\Enums\StubsPathEnum;
+
 trait ResolveStubPath
 {
     public function resolveMigrationStubPath(string $stub): string
@@ -9,6 +11,6 @@ trait ResolveStubPath
 
         return file_exists($published)
             ? $published
-            : base_path('vendor/laravel/framework/src/Illuminate/Database/Migrations/stubs/' . $stub);
+            : base_path(StubsPathEnum::MIGRATION->value . $stub);
     }
 }

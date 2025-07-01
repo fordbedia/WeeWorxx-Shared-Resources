@@ -98,12 +98,15 @@ abstract class ModularMakeCommand extends Command
             case 'migration':
                 $this->fileName = date('Y_m_d_His').'_'.$this->className;
                 if ($this->table) {
-                    $this->stubPath = $this->resolveMigrationStubPath('migration.update.stub');
+                    $this->stubPath = $this->resolveMigrationStubPath('update.stub');
                 } else if ($this->create) {
-                    $this->stubPath = $this->resolveMigrationStubPath('migration.create.stub');
+                    $this->stubPath = $this->resolveMigrationStubPath('create.stub');
                 } else {
-                    $this->stubPath = $this->resolveMigrationStubPath('migration.stub');
+                    $this->stubPath = $this->resolveMigrationStubPath('stub');
                 }
+                break;
+            case 'controller':
+                $this->fileName = $this->className;
                 break;
         }
     }

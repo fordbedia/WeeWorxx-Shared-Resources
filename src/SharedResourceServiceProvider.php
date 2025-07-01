@@ -5,7 +5,7 @@ namespace WeeWorxxSDK\SharedResources;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\File;
 use WeeWorxxSDK\SharedResources\Modules\User\UserRepositoryServiceProvider;
-use WeeWorxxSDK\SharedResources\SDK\Console\Config\MakeAnythingCommand;
+use WeeWorxxSDK\SharedResources\SDK\Console\Config\Make;
 
 class SharedResourceServiceProvider extends ServiceProvider
 {
@@ -19,7 +19,7 @@ class SharedResourceServiceProvider extends ServiceProvider
 
         if ($this->app->runningInConsole()) {
             $this->commands([
-                MakeAnythingCommand::class,
+                Make::class,
             ]);
         }
     }
