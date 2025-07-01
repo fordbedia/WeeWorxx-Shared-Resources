@@ -1,6 +1,6 @@
 <?php
 
-namespace SharedResources\Modules\User;
+namespace WeeWorxxSDK\SharedResources\Modules\User;
 
 use Illuminate\Support\ServiceProvider;
 

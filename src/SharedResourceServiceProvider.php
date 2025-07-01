@@ -1,10 +1,11 @@
 <?php
 
-namespace SharedResources;
+namespace WeeWorxxSDK\SharedResources;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\File;
-use SharedResources\Modules\User\UserRepositoryServiceProvider;
+use WeeWorxxSDK\SharedResources\Modules\User\UserRepositoryServiceProvider;
+use WeeWorxxSDK\SharedResources\SDK\Console\Config\MakeAnythingCommand;
 
 class SharedResourceServiceProvider extends ServiceProvider
 {
@@ -15,6 +16,12 @@ class SharedResourceServiceProvider extends ServiceProvider
 
         // Optional: Load SDK services, views, etc.
         // $this->loadViewsFrom(__DIR__ . '/SDK/resources/views', 'sdk');
+
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                MakeAnythingCommand::class,
+            ]);
+        }
     }
 
     protected function loadModules()

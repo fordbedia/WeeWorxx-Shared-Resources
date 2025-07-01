@@ -6,13 +6,13 @@
   "license": "MIT",
   "autoload": {
     "psr-4": {
-      "SharedResources\\": "src/"
+      "WeeWorxxSDK\\SharedResources\\": "src/"
     }
   },
   "extra": {
     "laravel": {
       "providers": [
-        "SharedResources\\SharedResourceServiceProvider"
+        "WeeWorxxSDK\\SharedResources\\SharedResourceServiceProvider"
       ]
     }
   },

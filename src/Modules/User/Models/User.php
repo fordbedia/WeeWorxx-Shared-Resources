@@ -1,6 +1,6 @@
 <?php
 
-namespace SharedResources\Modules\User\Models;
+namespace WeeWorxxSDK\SharedResources\Modules\User\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
