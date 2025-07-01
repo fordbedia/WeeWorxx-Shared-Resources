@@ -4,15 +4,20 @@ namespace WeeWorxxSDK\SharedResources\SDK\Console\Config;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
+use WeeWorxxSDK\SharedResources\SDK\Console\Helpers\Traits\ResolveStubPath;
 
 abstract class ModularMakeCommand extends Command
 {
+    use ResolveStubPath;
+
     protected string $what;
     protected string $className;
     protected ?string $module;
     protected ?string $table;
     protected ?string $create;
     protected ?string $modelName;
+    protected string $fileName;
+    protected string $stubPath;
 
     protected function initializeInputs(): void
     {
@@ -44,6 +49,7 @@ abstract class ModularMakeCommand extends Command
 
     protected function artisanCallOrCustom(string $artisanCommand, array $args = []): int
     {
+        $this->prepareWriteContext($this->what);
         if ($this->module) {
             return $this->makeInModule($artisanCommand, $args);
         }
@@ -85,4 +91,20 @@ abstract class ModularMakeCommand extends Command
     protected function makeRequest(): int { return 0; }
     protected function makeResource(): int { return 0; }
     protected function makeSeeder(): int { return 0; }
+
+    protected function prepareWriteContext($what)
+    {
+        switch($what) {
+            case 'migration':
+                $this->fileName = date('Y_m_d_His').'_'.$this->className;
+                if ($this->table) {
+                    $this->stubPath = $this->resolveMigrationStubPath('migration.update.stub');
+                } else if ($this->create) {
+                    $this->stubPath = $this->resolveMigrationStubPath('migration.create.stub');
+                } else {
+                    $this->stubPath = $this->resolveMigrationStubPath('migration.stub');
+                }
+                break;
+        }
+    }
 }

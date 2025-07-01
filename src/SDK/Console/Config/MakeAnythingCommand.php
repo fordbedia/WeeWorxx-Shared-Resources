@@ -17,7 +17,7 @@ class MakeAnythingCommand extends ModularMakeCommand
     protected function makeInModule(string $command, array $args): int
     {
         // Define the module root directory
-        $modulePath = base_path("vendor/weeworxx/shared-resources/modules/{$this->module}");
+        $modulePath = base_path("vendor/weeworxx/shared-resources/src/Modules/{$this->module}");
 
         // Define subpaths based on component type
         $paths = [
@@ -34,11 +34,12 @@ class MakeAnythingCommand extends ModularMakeCommand
         File::ensureDirectoryExists($fullPath);
 
         // Generate the file manually or call Artisan with a custom path
-        $filename = $this->className . '.php';
+        $filename =$this->fileName . '.php';
         $targetPath = "{$fullPath}/{$filename}";
+        $stubPath = file_get_contents($this->stubPath);
 
         // For now, just a file stub — you can customize with real stubs later
-        File::put($targetPath, "<?php\n\n// {$this->what} {$this->className}");
+        File::put($targetPath, $stubPath);
 
         $this->info("Created {$this->what} in module [{$this->module}]: {$targetPath}");
 
