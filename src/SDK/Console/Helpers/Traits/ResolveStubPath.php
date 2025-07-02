@@ -11,6 +11,6 @@ trait ResolveStubPath
 
         return file_exists($published)
             ? $published
-            : base_path(StubsPathEnum::MIGRATION->value . $stub);
+            : base_path(StubsPathEnum::MIGRATION->getFullPath() . $stub);
     }
 }

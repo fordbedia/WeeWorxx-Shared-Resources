@@ -4,10 +4,10 @@ namespace WeeWorxxSDK\SharedResources\SDK\WeeWorxxApp\Enums;
 
 enum StubsPathEnum: string
 {
-    case MIGRATION = '/vendor/weeworxx/shared-resources/src/SDK/WeeWorxxApp/stubs/migration.';
+    case MIGRATION = 'migration.';
 
     public function getFullPath()
     {
-        return __DIR__ . $this->value;
+        return '/vendor/weeworxx/shared-resources/src/SDK/WeeWorxxApp/stubs/' . $this->value;
     }
 }
