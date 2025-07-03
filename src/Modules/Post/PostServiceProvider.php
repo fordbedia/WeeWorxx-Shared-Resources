@@ -1,10 +1,10 @@
 <?php
 
-namespace WeeWorxxSDK\SharedResources\Modules\User;
+namespace WeeWorxxSDK\SharedResources\Modules\Post;
 
 use Illuminate\Support\ServiceProvider;
 
-class UserRepositoryServiceProvider extends ServiceProvider
+class PostServiceProvider extends ServiceProvider
 {
     /**
      * Register any application services.

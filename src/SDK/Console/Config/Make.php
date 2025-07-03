@@ -10,7 +10,9 @@ class Make extends ModularMakeCommand
         {--module= : Module Name}
         {--table= : Name of table to derive model or migration from}
         {--create= : Create a migration file for the model}
-        {--model-name= : Model to be targeted for observer}';
+        {--model-name= : Model to be targeted for observer}
+        {--resource : Turn controller into a formatted API HTTP request}
+        {--factory : Factory of the model}';
 
     protected $description = 'Create Laravel components in modules or the default app paths';
 
@@ -36,13 +38,61 @@ class Make extends ModularMakeCommand
         // Generate the file manually or call Artisan with a custom path
         $filename =$this->fileName . '.php';
         $targetPath = "{$fullPath}/{$filename}";
-        $stubPath = file_get_contents($this->stubPath);
+        $rawStub = file_get_contents($this->stubPath);
+        $compiledStubPath = $this->populateStub($rawStub);
 
         // For now, just a file stub — you can customize with real stubs later
-        File::put($targetPath, $stubPath);
-
-        $this->info("Created {$this->what} in module [{$this->module}]: {$targetPath}");
+        if (! file_exists($targetPath)) {
+            File::put($targetPath, $compiledStubPath);
+            $this->info("Created {$this->what} in module [{$this->module}]: {$targetPath}");
+        } else {
+            $this->info("File already exist at {$this->module}: {$targetPath}");
+        }
 
         return 0;
+    }
+
+    /**
+     * @param string $stub
+     * @return string
+     */
+    protected function populateStub(string $stub): string
+    {
+        return str_replace(
+            [
+                '{{ namespace }}',
+                '{{ class }}',
+                '{{ rootNamespace }}',
+                '{{ table }}',
+                '{{ factoryImport }}',
+                '{{ factory }}'
+            ],
+            [
+                $this->calculateNamespace(),
+                $this->className,
+                app()->getNamespace(),
+                $this->table ?? 'table_name', // fallback if --table is not provided
+                $this->factory ? 'use Illuminate\Database\Eloquent\Factories\HasFactory;' : '',
+                $this->factory ? 'use HasFactory;' : ''
+            ],
+            $stub
+        );
+    }
+
+    /**
+     * @return string
+     */
+    protected function calculateNamespace(): string
+    {
+        switch($this->what) {
+            case 'controller':
+                // Example: Vendor\Package\Modules\User\Http\Controllers
+                return 'WeeWorxxSDK\\SharedResources\\Modules\\' . $this->module . '\\Http\\Controllers';
+                break;
+            case 'model':
+                return 'WeeWorxxSDK\\SharedResources\\Modules\\' . $this->module . '\\Models';
+            default:
+                return '';
+        }
     }
 }

@@ -18,6 +18,8 @@ abstract class ModularMakeCommand extends Command
     protected ?string $modelName;
     protected string $fileName;
     protected string $stubPath;
+    protected string $resource;
+    protected string $factory;
 
     protected function initializeInputs(): void
     {
@@ -27,6 +29,8 @@ abstract class ModularMakeCommand extends Command
         $this->table = $this->option('table');
         $this->create = $this->option('create');
         $this->modelName = $this->option('model-name');
+        $this->resource = $this->option('resource');
+        $this->factory = $this->option('factory');
     }
 
     public function handle(): int
@@ -92,7 +96,10 @@ abstract class ModularMakeCommand extends Command
     protected function makeResource(): int { return 0; }
     protected function makeSeeder(): int { return 0; }
 
-    protected function prepareWriteContext($what)
+    /**
+     * @param $what
+     */
+    protected function prepareWriteContext($what): void
     {
         switch($what) {
             case 'migration':
@@ -107,6 +114,19 @@ abstract class ModularMakeCommand extends Command
                 break;
             case 'controller':
                 $this->fileName = $this->className;
+                if ($this->resource) {
+                    $this->stubPath = $this->resolveControllerStubPath('api.stub');
+                } else {
+                    $this->stubPath = $this->resolveControllerStubPath('plain.stub');
+                }
+                break;
+            case 'model':
+                $this->fileName = $this->className;
+                if ($this->factory) {
+                    $this->stubPath = $this->resolveModelStubPath('stub');
+                } else {
+                    $this->stubPath = $this->resolveModelStubPath('plain.stub');
+                }
                 break;
         }
     }

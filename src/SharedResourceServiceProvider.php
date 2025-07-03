@@ -4,11 +4,17 @@ namespace WeeWorxxSDK\SharedResources;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\File;
-use WeeWorxxSDK\SharedResources\Modules\User\UserRepositoryServiceProvider;
+use WeeWorxxSDK\SharedResources\Modules\Post\PostServiceProvider;
+use WeeWorxxSDK\SharedResources\Modules\User\UserServiceProvider;
 use WeeWorxxSDK\SharedResources\SDK\Console\Config\Make;
 
 class SharedResourceServiceProvider extends ServiceProvider
 {
+    protected array $providers = [
+        UserServiceProvider::class,
+        PostServiceProvider::class
+    ];
+
     public function boot()
     {
         // Load module routes and migrations dynamically
@@ -53,7 +59,12 @@ class SharedResourceServiceProvider extends ServiceProvider
 
     public function register()
     {
-        $this->app->register(UserRepositoryServiceProvider::class);
+        // ==============================================================
+        // Register all providers
+        // ==============================================================
+        foreach($this->providers as $provider) {
+            $this->app->register($provider);
+        }
     }
 }
 

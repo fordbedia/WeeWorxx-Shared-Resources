@@ -5,6 +5,10 @@ use WeeWorxxSDK\SharedResources\SDK\WeeWorxxApp\Enums\StubsPathEnum;
 
 trait ResolveStubPath
 {
+    /**
+     * @param string $stub
+     * @return string
+     */
     public function resolveMigrationStubPath(string $stub): string
     {
         $published = base_path('stubs/' . $stub);
@@ -12,5 +16,23 @@ trait ResolveStubPath
         return file_exists($published)
             ? $published
             : base_path(StubsPathEnum::MIGRATION->getFullPath() . $stub);
+    }
+
+    /**
+     * @param string $stub
+     * @return string
+     */
+    public function resolveControllerStubPath(string $stub): string
+    {
+        return base_path(StubsPathEnum::CONTROLLER->getFullPath() . $stub);
+    }
+
+    /**
+     * @param string $stub
+     * @return string
+     */
+    public function resolveModelStubPath(string $stub): string
+    {
+        return base_path(StubsPathEnum::MODEL->getFullPath() . $stub);
     }
 }
