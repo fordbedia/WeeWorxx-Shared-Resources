@@ -27,6 +27,7 @@ class Make extends ModularMakeCommand
             'make:controller' => 'Http/Controllers',
             'make:migration'  => 'Database/Migrations',
             'make:seeder'     => 'Database/Seeders',
+            'make:factory'    => 'Database/Factories'
         ];
 
         $subPath = $paths[$command] ?? 'Misc';
@@ -71,7 +72,7 @@ class Make extends ModularMakeCommand
                 $this->calculateNamespace(),
                 $this->className,
                 app()->getNamespace(),
-                $this->table ?? 'table_name', // fallback if --table is not provided
+                $this->table ?: $this->create, // fallback if --table is not provided
                 $this->factory ? 'use Illuminate\Database\Eloquent\Factories\HasFactory;' : '',
                 $this->factory ? 'use HasFactory;' : ''
             ],
@@ -91,6 +92,10 @@ class Make extends ModularMakeCommand
                 break;
             case 'model':
                 return 'WeeWorxxSDK\\SharedResources\\Modules\\' . $this->module . '\\Models';
+            case 'factory':
+                return 'WeeWorxxSDK\\SharedResources\\Modules\\' . $this->module . '\\Database\\Factories';
+            case 'seeder':
+                 return 'WeeWorxxSDK\\SharedResources\\Modules\\' . $this->module . '\\Database\\Seeders';
             default:
                 return '';
         }

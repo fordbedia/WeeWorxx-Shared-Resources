@@ -35,4 +35,18 @@ trait ResolveStubPath
     {
         return base_path(StubsPathEnum::MODEL->getFullPath() . $stub);
     }
+
+    /**
+     * @param string $stub
+     * @return string
+     */
+    public function resolveFactoryStubPath(string $stub): string
+    {
+        return base_path(StubsPathEnum::FACTORY->getFullPath() . $stub);
+    }
+
+    public function resolveSeederStubPath(string $stub): string
+    {
+        return base_path(StubsPathEnum::SEEDER->getFullPath() . $stub);
+    }
 }

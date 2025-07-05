@@ -47,6 +47,7 @@ abstract class ModularMakeCommand extends Command
             'request'    => $this->makeRequest(),
             'resource'   => $this->makeResource(),
             'seeder'     => $this->makeSeeder(),
+            'factory'    => $this->makeFactory(),
             default      => $this->error('Invalid make option: ' . $this->what),
         };
     }
@@ -88,13 +89,26 @@ abstract class ModularMakeCommand extends Command
         ]);
     }
 
+    protected function makeFactory(): int
+    {
+        return $this->artisanCallOrCustom('make:factory', [
+            'name' => $this->className
+        ]);
+    }
+
     // Empty stubs — override these in child class as needed
     protected function makeAction(): int { return 0; }
     protected function makeCommand(): int { return 0; }
     protected function makeObserver(): int { return 0; }
     protected function makeRequest(): int { return 0; }
     protected function makeResource(): int { return 0; }
-    protected function makeSeeder(): int { return 0; }
+
+    protected function makeSeeder(): int
+    {
+        return $this->artisanCallOrCustom('make:seeder', [
+            'name' => $this->className
+        ]);
+    }
 
     /**
      * @param $what
@@ -127,6 +141,14 @@ abstract class ModularMakeCommand extends Command
                 } else {
                     $this->stubPath = $this->resolveModelStubPath('plain.stub');
                 }
+                break;
+            case 'factory':
+                $this->fileName = $this->className;
+                $this->stubPath = $this->resolveFactoryStubPath('stub');
+                break;
+            case 'seeder':
+                $this->fileName = $this->className;
+                $this->stubPath = $this->resolveSeederStubPath('stub');
                 break;
         }
     }
