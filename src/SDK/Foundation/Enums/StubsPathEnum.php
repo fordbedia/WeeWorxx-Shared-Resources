@@ -1,6 +1,6 @@
 <?php
 
-namespace WeeWorxxSDK\SharedResources\SDK\WeeWorxxApp\Enums;
+namespace WeeWorxxSDK\SharedResources\SDK\Foundation\Enums;
 
 enum StubsPathEnum: string
 {
@@ -12,6 +12,6 @@ enum StubsPathEnum: string
 
     public function getFullPath()
     {
-        return '/vendor/weeworxx/shared-resources/src/SDK/WeeWorxxApp/stubs/' . $this->value;
+        return '/vendor/weeworxx/shared-resources/src/SDK/Foundation/stubs/' . $this->value;
     }
 }

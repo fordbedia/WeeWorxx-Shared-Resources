@@ -1,7 +1,7 @@
 <?php
 namespace WeeWorxxSDK\SharedResources\SDK\Console\Helpers\Traits;
 
-use WeeWorxxSDK\SharedResources\SDK\WeeWorxxApp\Enums\StubsPathEnum;
+use WeeWorxxSDK\SharedResources\SDK\Foundation\Enums\StubsPathEnum;
 
 trait ResolveStubPath
 {
