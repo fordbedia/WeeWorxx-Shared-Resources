@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\File;
 use WeeWorxxSDK\SharedResources\Modules\Post\PostServiceProvider;
 use WeeWorxxSDK\SharedResources\Modules\User\UserServiceProvider;
 use WeeWorxxSDK\SharedResources\SDK\Console\Config\Make;
+use WeeWorxxSDK\SharedResources\SDK\Console\Config\ResetTestData;
 
 class SharedResourceServiceProvider extends ServiceProvider
 {
@@ -26,6 +27,7 @@ class SharedResourceServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([
                 Make::class,
+                ResetTestData::class,
             ]);
         }
     }

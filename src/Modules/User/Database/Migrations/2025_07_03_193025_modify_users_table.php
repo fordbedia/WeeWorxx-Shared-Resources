@@ -26,6 +26,9 @@ return new class extends Migration
                     $table->unsignedBigInteger('type_id')->after('remember_token');
                     $table->foreign('type_id')->references('id')->on('user_type')->onDelete('cascade');
                 }
+                if (! Schema::hasColumn('users', 'is_test')) {
+                    $table->tinyInteger('is_test')->default(0);
+                }
             });
         }
     }

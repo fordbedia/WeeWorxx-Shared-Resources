@@ -20,6 +20,7 @@ return new class extends Migration
                 $table->string('title');
                 $table->longText('content');
                 $table->timestamp('valid_at');
+                $table->tinyInteger('is_test')->default(0);
                 $table->timestamps();
             });
         }

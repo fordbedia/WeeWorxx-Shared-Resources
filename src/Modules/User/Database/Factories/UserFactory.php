@@ -29,7 +29,9 @@ class UserFactory extends Factory
             'email' => $this->faker->email(),
             'email_verified_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
             'password' => bcrypt('12345'),
-            'remember_token' => null
+            'remember_token' => null,
+            'type_id' => rand(1,2),
+            'is_test' => 1,
         ];
     }
 }

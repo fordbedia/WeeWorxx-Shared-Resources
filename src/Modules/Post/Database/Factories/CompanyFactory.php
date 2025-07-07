@@ -20,7 +20,8 @@ class CompanyFactory extends Factory
     {
         return [
             'name' => $this->faker->company(),
-            'logo' => $this->faker->imageUrl(400, 200, 'business', true)
+            'logo' => $this->faker->imageUrl(400, 200, 'business', true),
+            'is_test' => 1,
         ];
     }
 }

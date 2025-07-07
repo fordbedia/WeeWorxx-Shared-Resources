@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Post::factory()
             ->count(100)
-            ->create();
+            ->create(['is_test' => 1]);
     }
 
     /**

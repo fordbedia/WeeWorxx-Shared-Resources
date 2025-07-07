@@ -14,7 +14,7 @@ return new class extends Migration
     {
         User::factory()
             ->count(50)
-            ->create(['type_id' => 1]);
+            ->create(['type_id' => 1, 'is_test' => 1]);
     }
 
     /**

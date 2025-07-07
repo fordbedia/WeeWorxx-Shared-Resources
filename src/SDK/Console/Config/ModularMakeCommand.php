@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Str;
 use WeeWorxxSDK\SharedResources\SDK\Console\Helpers\Traits\ResolveStubPath;
 
-abstract class ModularMakeCommand extends Command
+abstract class ModularMakeCommand extends ModularCommand
 {
     use ResolveStubPath;
 

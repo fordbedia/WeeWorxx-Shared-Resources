@@ -24,7 +24,8 @@ class PostFactory extends Factory
             'post_status_id' => rand(1, 5),
             'title' => $this->faker->title(),
             'content' => $this->faker->paragraphs(3, true),
-            'valid_at' => $this->faker->dateTimeBetween('now', '+1 year')
+            'valid_at' => $this->faker->dateTimeBetween('now', '+1 year'),
+            'is_test' => 1
         ];
     }
 }

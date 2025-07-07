@@ -16,6 +16,7 @@ return new class extends Migration
                 $table->id();
                 $table->string('name');
                 $table->text('logo')->nullable();
+                $table->tinyInteger('is_test')->default(0);
                 $table->timestamps();
             });
         }

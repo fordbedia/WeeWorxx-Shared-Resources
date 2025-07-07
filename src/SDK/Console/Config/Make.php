@@ -16,6 +16,9 @@ class Make extends ModularMakeCommand
 
     protected $description = 'Create Laravel components in modules or the default app paths';
 
+    /**
+     * @throws \Exception
+     */
     protected function makeInModule(string $command, array $args): int
     {
         // Define the module root directory
@@ -36,6 +39,9 @@ class Make extends ModularMakeCommand
         // Ensure directory exists
         File::ensureDirectoryExists($fullPath);
 
+        // Show in progress
+        $this->inProgressInfo();
+
         // Generate the file manually or call Artisan with a custom path
         $filename =$this->fileName . '.php';
         $targetPath = "{$fullPath}/{$filename}";
@@ -45,9 +51,9 @@ class Make extends ModularMakeCommand
         // For now, just a file stub — you can customize with real stubs later
         if (! file_exists($targetPath)) {
             File::put($targetPath, $compiledStubPath);
-            $this->info("Created {$this->what} in module [{$this->module}]: {$targetPath}");
+            $this->completed("Created <success>{$this->what}</success> in module <success>[{$this->module}]</success>: {$targetPath}");
         } else {
-            $this->info("File already exist at {$this->module}: {$targetPath}");
+            $this->completed("File already exist at {$this->module}: {$targetPath}");
         }
 
         return 0;
@@ -100,4 +106,6 @@ class Make extends ModularMakeCommand
                 return '';
         }
     }
+
+    protected function commandType():string { return 'make'; }
 }
