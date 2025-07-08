@@ -5,7 +5,12 @@ namespace WeeWorxxSDK\SharedResources\Modules\Post\Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use WeeWorxxSDK\SharedResources\Modules\Post\Models\Benefits;
+use WeeWorxxSDK\SharedResources\Modules\Post\Models\Pay;
 use WeeWorxxSDK\SharedResources\Modules\Post\Models\Post;
+use WeeWorxxSDK\SharedResources\Modules\Post\Models\PostBenefits;
+use WeeWorxxSDK\SharedResources\Modules\Post\Models\PostSkills;
+use WeeWorxxSDK\SharedResources\Modules\Post\Models\Skills;
 use WeeWorxxSDK\SharedResources\SDK\Database\MakeSeeder;
 
 class PostSeeder extends MakeSeeder
@@ -18,6 +23,16 @@ class PostSeeder extends MakeSeeder
         Post::factory()
             ->count(100)
             ->create();
+        
+        Pay::factory()
+            ->count(100)
+            ->create();
+        Skills::factory()
+            ->count(100)
+            ->create();
+        PostSkills::factory()->count(100)->create();
+        Benefits::factory()->count(100)->create();
+        PostBenefits::factory()->count(100)->create();
     }
 
     /**

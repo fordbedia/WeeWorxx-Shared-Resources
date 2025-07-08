@@ -4,6 +4,7 @@ namespace WeeWorxxSDK\SharedResources\Modules\Post\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use WeeWorxxSDK\SharedResources\Modules\Post\Models\Post;
 
 class PostsController extends Controller
 {
@@ -12,7 +13,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        //
+        return Post::with(['company', 'postedBy', 'status'])->paginate(10);
     }
 
     /**
@@ -28,7 +29,7 @@ class PostsController extends Controller
      */
     public function show(string $id)
     {
-        //
+        dd('sdfsdf');
     }
 
     /**

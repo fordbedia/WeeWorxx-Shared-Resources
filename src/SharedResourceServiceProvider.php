@@ -2,6 +2,7 @@
 
 namespace WeeWorxxSDK\SharedResources;
 
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\File;
 use WeeWorxxSDK\SharedResources\Modules\Post\PostServiceProvider;
@@ -43,12 +44,23 @@ class SharedResourceServiceProvider extends ServiceProvider
         $moduleDirs = File::directories($modulesPath);
 
         foreach ($moduleDirs as $moduleDir) {
-            // Routes
-            $routePath = $moduleDir . '/routes/web.php';
-            if (file_exists($routePath)) {
-                $this->loadRoutesFrom($routePath);
+            // ==============================================================
+            // Load Route Path: web and api.php
+            // ==============================================================
+            $web = $moduleDir . '/routes/web.php';
+            if (file_exists($web)) {
+                $this->loadRoutesFrom($web);
             }
-
+            $api = $moduleDir . '/routes/api.php';
+            if (file_exists($api)) {
+                Route::prefix('api')
+                     ->middleware('api')
+                     // optionally constrain namespace so your controllers resolve
+                     ->namespace('WeeWorxxSDK\\SharedResources\\Modules\\'
+                                . basename($moduleDir)
+                                . '\\Http\\Controllers')
+                     ->group($api);
+            }
             // Migrations
             $migrationPath = $moduleDir . '/Database/Migrations';
             if (is_dir($migrationPath)) {

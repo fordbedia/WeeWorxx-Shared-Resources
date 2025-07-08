@@ -3,6 +3,7 @@
 namespace WeeWorxxSDK\SharedResources\Modules\Post\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use WeeWorxxSDK\SharedResources\Modules\Post\Models\Pay;
 use WeeWorxxSDK\SharedResources\Modules\Post\Models\Post;
 
 /**
@@ -18,11 +19,15 @@ class PostFactory extends Factory
      */
     public function definition(): array
     {
+        $jobType = ['full_time', 'part_time', 'contract'];
+        $payId = Pay::where('id', rand(1,50))->pluck('id')->first();
         return [
             'posted_by' => rand(1, 50),
             'company_id' => rand(1, 50),
             'post_status_id' => rand(1, 5),
-            'title' => $this->faker->title(),
+            'job_type' => $jobType[rand(0, 2)],
+            'pay_id' => $payId,
+            'title' => $this->faker->jobTitle(),
             'content' => $this->faker->paragraphs(3, true),
             'valid_at' => $this->faker->dateTimeBetween('now', '+1 year'),
             'is_test' => 1

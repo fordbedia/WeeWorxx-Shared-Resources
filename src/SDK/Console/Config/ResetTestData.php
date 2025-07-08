@@ -4,6 +4,8 @@ namespace WeeWorxxSDK\SharedResources\SDK\Console\Config;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use WeeWorxxSDK\SharedResources\Modules\Post\Database\Factories\PayFactory;
+use WeeWorxxSDK\SharedResources\Modules\Post\Database\Factories\SkillsFactory;
 use WeeWorxxSDK\SharedResources\Modules\Post\Database\Seeders\CompanySeeder;
 use WeeWorxxSDK\SharedResources\Modules\Post\Database\Seeders\PostSeeder;
 use WeeWorxxSDK\SharedResources\Modules\Post\Database\Seeders\PostStatusesSeeder;
