@@ -23,7 +23,7 @@ class PostSeeder extends MakeSeeder
         Post::factory()
             ->count(100)
             ->create();
-        
+
         Pay::factory()
             ->count(100)
             ->create();

@@ -13,7 +13,14 @@ class PostsController extends Controller
      */
     public function index()
     {
-        return Post::with(['company', 'postedBy', 'status'])->paginate(10);
+        return Post::with([
+            'company',
+            'postedBy',
+            'status',
+            'pay',
+            'skills',
+            'benefits'
+        ])->paginate(10);
     }
 
     /**

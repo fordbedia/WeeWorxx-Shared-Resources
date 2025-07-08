@@ -33,4 +33,33 @@ class Post extends Model
     {
         return PostFactory::new();
     }
+
+    public function pay()
+    {
+        return $this->hasOne(Pay::class, 'id', 'pay_id');
+    }
+
+    public function skills()
+    {
+        return $this->belongsToMany(
+            Skills::class,
+            'post_skills',
+            'post_id',
+            'skills_id',
+            'id',
+            'id'
+        )->withTimestamps();
+    }
+
+    public function benefits()
+    {
+        return $this->belongsToMany(
+            Benefits::class,
+            'post_benefits',
+            'post_id',
+            'benefits_id',
+            'id',
+            'id'
+        )->withTimestamps();
+    }
 }
