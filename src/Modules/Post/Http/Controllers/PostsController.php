@@ -36,7 +36,7 @@ class PostsController extends Controller
      */
     public function show(string $id)
     {
-        dd('sdfsdf');
+        
     }
 
     /**
