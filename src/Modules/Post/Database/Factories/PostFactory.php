@@ -3,7 +3,6 @@
 namespace WeeWorxxSDK\SharedResources\Modules\Post\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use WeeWorxxSDK\SharedResources\Modules\Post\Models\Pay;
 use WeeWorxxSDK\SharedResources\Modules\Post\Models\Post;
 
 /**
@@ -20,13 +19,26 @@ class PostFactory extends Factory
     public function definition(): array
     {
         $jobType = ['full_time', 'part_time', 'contract'];
-        $payId = Pay::where('id', rand(1,50))->pluck('id')->first();
+        $jobLocation = [
+            'Remote',
+            'Houston, TX',
+            'Remote in LA',
+            'Remote/Hybrid',
+            'Remote/Hybrid in Tallahassee, FL',
+            'Orlando, FL',
+            'New York, NY',
+            'Remote in NY',
+            'Remote in San Diego',
+            'Hybrid',
+            'Hybrid in New Orleans'
+        ];
         return [
             'posted_by' => rand(1, 50),
             'company_id' => rand(1, 50),
             'post_status_id' => rand(1, 5),
-            'job_type' => $jobType[rand(0, 2)],
-            'pay_id' => $payId,
+            'employment_type' => $jobType[rand(0, 2)],
+            'salary' => $this->faker->randomDigit(),
+            'job_location' => $jobLocation[rand(0,10)],
             'title' => $this->faker->jobTitle(),
             'content' => $this->faker->paragraphs(3, true),
             'valid_at' => $this->faker->dateTimeBetween('now', '+1 year'),

@@ -34,11 +34,6 @@ class Post extends Model
         return PostFactory::new();
     }
 
-    public function pay()
-    {
-        return $this->hasOne(Pay::class, 'id', 'pay_id');
-    }
-
     public function skills()
     {
         return $this->belongsToMany(

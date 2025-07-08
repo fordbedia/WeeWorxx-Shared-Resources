@@ -17,7 +17,6 @@ class PostsController extends Controller
             'company',
             'postedBy',
             'status',
-            'pay',
             'skills',
             'benefits'
         ])->paginate(10);
@@ -36,7 +35,7 @@ class PostsController extends Controller
      */
     public function show(string $id)
     {
-        
+
     }
 
     /**

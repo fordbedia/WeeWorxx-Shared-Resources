@@ -11,24 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if(! Schema::hasTable('pay')) {
-            Schema::create('pay', function(Blueprint $table) {
-                $table->id();
-                $table->enum('type', ['salary', 'hourly'])->nullable();
-                $table->string('currency')->default('USD');
-                $table->string('amount');
-                $table->timestamps();
-            });
-        }
-
         if (! Schema::hasTable('posts')) {
             Schema::create('posts', function (Blueprint $table) {
                 $table->id();
                 $table->unsignedBigInteger('posted_by');
                 $table->unsignedBigInteger('company_id');
                 $table->unsignedBigInteger('post_status_id');
-                $table->unsignedBigInteger('pay_id')->nullable();
-                $table->enum('job_type', ['full_time', 'part_time', 'contract']);
+                $table->string('salary')->nullable();
+                $table->enum('employment_type', ['full_time', 'part_time', 'contract']);
+                $table->string('job_location');
                 $table->string('title');
                 $table->longText('content');
                 $table->timestamp('valid_at');
@@ -41,8 +32,6 @@ return new class extends Migration
                     ->references('id')->on('company')->onDelete('cascade');
                 $table->foreign('post_status_id')
                     ->references('id')->on('post_statuses')->onDelete('cascade');
-                $table->foreign('pay_id')
-                    ->references('id')->on('pay')->onDelete('cascade');
             });
         }
     }
@@ -52,10 +41,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        if (Schema::hasTable('pay')) {
-            Schema::dropIfExists('pay');
-        }
-
         if (Schema::hasTable('posts')) {
             Schema::dropIfExists('posts');
         }
