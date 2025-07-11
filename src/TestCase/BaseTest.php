@@ -19,6 +19,14 @@ abstract class BaseTest extends BaseTestCase
     {
         parent::setUp();
 
+        // ==============================================================
+        // Only execute if user has used the RefreshDatabase trait
+        // otherwise, ignore this.
+        // ==============================================================
+        if (method_exists($this, 'refreshDatabase')) {
+            $this->refreshDatabase();
+        }
+
         $this->resetMysqlSchema();
     }
 
