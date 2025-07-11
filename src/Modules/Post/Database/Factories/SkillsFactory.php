@@ -11,7 +11,7 @@ use WeeWorxxSDK\SharedResources\Modules\Post\Models\Skills;
  */
 class SkillsFactory extends Factory
 {
-    protected string $model = Skills::class;
+    protected $model = Skills::class;
 
     /**
      * Define the model's default state.

@@ -10,7 +10,7 @@ use WeeWorxxSDK\SharedResources\Modules\User\Models\User;
  */
 class UserFactory extends Factory
 {
-    protected string $model = User::class;
+    protected $model = User::class;
 
     /**
      * Define the model's default state.

@@ -3,10 +3,10 @@
 namespace WeeWorxxSDK\SharedResources\Modules\Post\Tests;
 
 use Illuminate\Support\Facades\File;
-use WeeWorxxSDK\SharedResources\TestCase\TestCase as BaseTestCase;
 use WeeWorxxSDK\SharedResources\SharedResourceServiceProvider;
+use WeeWorxxSDK\SharedResources\TestCase\BaseTest;
 
-class TestCase extends BaseTestCase
+class TestCase extends BaseTest
 {
 
 }

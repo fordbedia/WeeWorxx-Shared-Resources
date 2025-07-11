@@ -10,7 +10,7 @@ use WeeWorxxSDK\SharedResources\Modules\Post\Models\Post;
  */
 class PostFactory extends Factory
 {
-    protected string $model = Post::class;
+    protected $model = Post::class;
     /**
      * Define the model's default state.
      *

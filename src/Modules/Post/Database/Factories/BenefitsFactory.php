@@ -11,7 +11,7 @@ use WeeWorxxSDK\SharedResources\Modules\Post\Models\Benefits;
  */
 class BenefitsFactory extends Factory
 {
-    protected string $model = Benefits::class;
+    protected $model = Benefits::class;
 
     /**
      * Define the model's default state.

@@ -10,7 +10,7 @@ use WeeWorxxSDK\SharedResources\Modules\Post\Models\Company;
  */
 class CompanyFactory extends Factory
 {
-    protected string $model = Company::class;
+    protected $model = Company::class;
     /**
      * Define the model's default state.
      *

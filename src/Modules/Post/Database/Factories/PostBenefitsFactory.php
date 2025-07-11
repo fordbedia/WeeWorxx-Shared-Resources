@@ -12,7 +12,7 @@ use WeeWorxxSDK\SharedResources\Modules\Post\Models\PostBenefits;
  */
 class PostBenefitsFactory extends Factory
 {
-    protected string $model = PostBenefits::class;
+    protected $model = PostBenefits::class;
 
     /**
      * Define the model's default state.
