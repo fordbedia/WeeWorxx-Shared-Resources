@@ -4,6 +4,7 @@ namespace WeeWorxxSDK\SharedResources\Modules\Post\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 use WeeWorxxSDK\SharedResources\Modules\Post\Database\Factories\PostFactory;
 use WeeWorxxSDK\SharedResources\Modules\User\Models\User;
 
@@ -13,6 +14,20 @@ class Post extends Model
 
     protected $table = 'posts';
     protected $guarded = [];
+
+    protected static function booted()
+    {
+        static::created(function($post) {
+            if (!empty($post->title)) {
+                $post->permalink = Str::slug($post->title);
+                $hasDuplicatePermalink = self::where('permalink', $post->permalink)->exists();
+                if ($hasDuplicatePermalink) {
+                    $post->permalink = Str::slug($post->title .'-'.$post->id);
+                }
+                $post->save();
+            }
+        });
+    }
 
     public function company()
     {

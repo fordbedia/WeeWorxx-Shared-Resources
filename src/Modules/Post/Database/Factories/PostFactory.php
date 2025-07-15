@@ -32,6 +32,9 @@ class PostFactory extends Factory
             'Hybrid',
             'Hybrid in New Orleans'
         ];
+        $paragraphs = collect(range(1, rand(1, 3))) // generate 3 paragraphs
+            ->map(fn () => $this->faker->text(5000))
+            ->implode("\n\n"); // join them with paragraph spacing
         return [
             'posted_by' => rand(1, 50),
             'company_id' => rand(1, 50),
@@ -40,7 +43,7 @@ class PostFactory extends Factory
             'salary' => $this->faker->randomDigit(),
             'job_location' => $jobLocation[rand(0,10)],
             'title' => $this->faker->jobTitle(),
-            'content' => $this->faker->paragraphs(3, true),
+            'content' => $paragraphs,
             'valid_at' => $this->faker->dateTimeBetween('now', '+1 year'),
             'is_test' => 1
         ];

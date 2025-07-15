@@ -17,6 +17,7 @@ return new class extends Migration
                 $table->unsignedBigInteger('posted_by');
                 $table->unsignedBigInteger('company_id');
                 $table->unsignedBigInteger('post_status_id');
+                $table->string('permalink')->unique()->default('');
                 $table->string('salary')->nullable();
                 $table->enum('employment_type', ['full_time', 'part_time', 'contract']);
                 $table->string('job_location');
@@ -26,6 +27,7 @@ return new class extends Migration
                 $table->tinyInteger('is_test')->default(0);
                 $table->timestamps();
 
+                $table->index('permalink');
                 $table->foreign('posted_by')
                     ->references('id')->on('posts')->onDelete('cascade');
                 $table->foreign('company_id')
