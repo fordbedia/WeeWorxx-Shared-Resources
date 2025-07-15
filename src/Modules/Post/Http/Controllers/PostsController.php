@@ -8,18 +8,19 @@ use WeeWorxxSDK\SharedResources\Modules\Post\Models\Post;
 
 class PostsController extends Controller
 {
+    protected array $relationships = [
+        'company',
+        'postedBy',
+        'status',
+        'skills',
+        'benefits'
+    ];
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return Post::with([
-            'company',
-            'postedBy',
-            'status',
-            'skills',
-            'benefits'
-        ])->paginate(10);
+        return Post::with($this->relationships)->paginate(10);
     }
 
     /**
@@ -35,7 +36,9 @@ class PostsController extends Controller
      */
     public function show(string $id)
     {
-
+        return Post::where('permalink', $id)
+            ->with($this->relationships)
+            ->first();
     }
 
     /**
