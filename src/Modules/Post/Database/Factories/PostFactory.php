@@ -42,6 +42,7 @@ class PostFactory extends Factory
             'employment_type' => $jobType[rand(0, 2)],
             'salary' => $this->faker->randomDigit(),
             'job_location' => $jobLocation[rand(0,10)],
+            'job_url' => $this->faker->url(),
             'title' => $this->faker->jobTitle(),
             'content' => $paragraphs,
             'valid_at' => $this->faker->dateTimeBetween('now', '+1 year'),

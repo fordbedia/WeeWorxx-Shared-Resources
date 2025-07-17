@@ -19,6 +19,7 @@ return new class extends Migration
                 $table->unsignedBigInteger('post_status_id');
                 $table->string('permalink')->unique()->default('');
                 $table->string('salary')->nullable();
+                $table->text('job_url');
                 $table->enum('employment_type', ['full_time', 'part_time', 'contract']);
                 $table->string('job_location');
                 $table->string('title');
