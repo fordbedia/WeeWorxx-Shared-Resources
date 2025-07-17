@@ -33,8 +33,8 @@ class PostFactory extends Factory
             'Hybrid in New Orleans'
         ];
         $paragraphs = collect(range(1, rand(1, 3))) // generate 3 paragraphs
-            ->map(fn () => $this->faker->text(5000))
-            ->implode("\n\n"); // join them with paragraph spacing
+            ->map(fn () => $this->faker->text(3000))
+            ->implode("<br /><br />"); // join them with paragraph spacing
         return [
             'posted_by' => rand(1, 50),
             'company_id' => rand(1, 50),

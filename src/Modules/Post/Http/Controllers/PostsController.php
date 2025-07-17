@@ -4,6 +4,7 @@ namespace WeeWorxxSDK\SharedResources\Modules\Post\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use WeeWorxxSDK\SharedResources\Modules\Post\Models\Post;
 
 class PostsController extends Controller
@@ -33,12 +34,19 @@ class PostsController extends Controller
 
     /**
      * Display the specified resource.
+     * @throws HttpException
      */
     public function show(string $id)
     {
-        return Post::where('permalink', $id)
+        $post = Post::where('permalink', $id)
             ->with($this->relationships)
             ->first();
+
+        if (! $post) {
+            throw new HttpException(404, 'Post Not Found.');
+        }
+
+        return $post;
     }
 
     /**
