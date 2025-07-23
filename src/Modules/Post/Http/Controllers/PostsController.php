@@ -14,7 +14,8 @@ class PostsController extends Controller
         'postedBy',
         'status',
         'skills',
-        'benefits'
+        'benefits',
+        'bookmarks'
     ];
     /**
      * Display a listing of the resource.

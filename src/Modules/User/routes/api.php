@@ -1,6 +1,7 @@
 <?php
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use WeeWorxxSDK\SharedResources\Modules\User\Http\Controllers\BookmarkController;
 use WeeWorxxSDK\SharedResources\Modules\User\Http\Controllers\UserController;
 
 Route::group([
@@ -10,6 +11,6 @@ Route::group([
     Route::resource('users', UserController::class);
     Route::post('users/authenticate', [UserController::class, 'authenticate']);
     Route::group(['prefix' => '/', 'middleware' => 'auth:api'], function() {
-
+        Route::resource('bookmark', BookmarkController::class);
     });
 });

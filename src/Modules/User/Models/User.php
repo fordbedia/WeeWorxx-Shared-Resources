@@ -6,6 +6,7 @@ namespace WeeWorxxSDK\SharedResources\Modules\User\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use WeeWorxxSDK\SharedResources\Modules\Post\Models\Post;
 use WeeWorxxSDK\SharedResources\Modules\User\Database\Factories\UserFactory;
 use Laravel\Passport\Contracts\OAuthenticatable;
 use Laravel\Passport\HasApiTokens;
@@ -54,5 +55,17 @@ class User extends Authenticatable implements OAuthenticatable
     protected static function newFactory()
     {
         return UserFactory::new();
+    }
+
+    public function bookmarks()
+    {
+        return $this->belongsToMany(
+            Post::class,
+            'user_post_bookmarks',
+            'user_id',
+            'post_id',
+            'id',
+            'id'
+        )->withTimestamps();
     }
 }
