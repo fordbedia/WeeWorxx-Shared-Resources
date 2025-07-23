@@ -3,6 +3,8 @@
 namespace WeeWorxxSDK\SharedResources\Modules\User;
 
 use Illuminate\Support\ServiceProvider;
+use WeeWorxxSDK\SharedResources\Modules\User\OAuth\OAuthContract;
+use WeeWorxxSDK\SharedResources\Modules\User\OAuth\UserOAuth;
 
 class UserServiceProvider extends ServiceProvider
 {
@@ -11,7 +13,9 @@ class UserServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->singleton(OAuthContract::class, function(){
+            return new UserOAuth(request());
+        });
     }
 
     /**
