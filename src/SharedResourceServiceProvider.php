@@ -5,6 +5,7 @@ namespace WeeWorxxSDK\SharedResources;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\File;
+use WeeWorxxSDK\SharedResources\Modules\Payment\PaymentServiceProvider;
 use WeeWorxxSDK\SharedResources\Modules\Post\PostServiceProvider;
 use WeeWorxxSDK\SharedResources\Modules\User\UserServiceProvider;
 use WeeWorxxSDK\SharedResources\SDK\Console\Config\Make;
@@ -14,7 +15,8 @@ class SharedResourceServiceProvider extends ServiceProvider
 {
     protected array $providers = [
         UserServiceProvider::class,
-        PostServiceProvider::class
+        PostServiceProvider::class,
+        PaymentServiceProvider::class,
     ];
 
     public function boot()
