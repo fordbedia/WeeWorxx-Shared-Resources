@@ -63,6 +63,10 @@ class StripeController extends Controller
 
         return response()->json([
             'status' => $intent->status,
+            'paymentIntent'  => [
+              'id'            => $intent->id,
+              'client_secret' => $intent->client_secret,
+            ],
         ]);
     }
 
