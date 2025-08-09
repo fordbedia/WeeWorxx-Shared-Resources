@@ -20,7 +20,7 @@ abstract class ModularResetTestDataCommand extends ModularCommand
         if (config('app.env') === 'local') {
             $this->instantiateAllProcess();
         } else {
-            throw new \RuntimeException('This command is not supported. Please run this on local only.');
+            throw new \RuntimeException('This command is not supported. Please run `ModularResetTestDataCommand` on local only.');
         }
     }
 

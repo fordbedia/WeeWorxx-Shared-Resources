@@ -21,7 +21,7 @@ class PostBenefitsFactory extends Factory
      */
     public function definition(): array
     {
-        $benefitsId = Benefits::where('id', rand(1,50))->pluck('id')->first();
+        $benefitsId = Benefits::where('id', rand(1,10))->pluck('id')->first();
         $postId = Post::where('id', rand(1,50))->pluck('id')->first();
         return [
             'benefits_id' => $benefitsId,

@@ -14,7 +14,7 @@ return new class extends Migration
         if (! Schema::hasTable('skills')) {
             Schema::create('skills', function (Blueprint $table) {
                 $table->id();
-                $table->string('name');
+                $table->string('name')->unique();
                 $table->string('identifier');
                 $table->timestamps();
             });

@@ -22,7 +22,7 @@ class PostSkillsFactory extends Factory
     public function definition(): array
     {
         $postId = Post::where('id', rand(1,50))->pluck('id')->first();
-        $skillsId = Skills::where('id', rand(1,50))->pluck('id')->first();
+        $skillsId = Skills::where('id', rand(1,13))->pluck('id')->first();
         return [
             'skills_id' => $skillsId,
             'post_id' => $postId

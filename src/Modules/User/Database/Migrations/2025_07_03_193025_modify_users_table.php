@@ -20,10 +20,10 @@ return new class extends Migration
                     $table->string('lname')->after('fname');
                 }
                 if(! Schema::hasColumn('users', 'mname')) {
-                    $table->string('mname')->after('lname');
+                    $table->string('mname')->after('lname')->nullable();
                 }
                 if(! Schema::hasColumn('users', 'type_id')) {
-                    $table->unsignedBigInteger('type_id')->after('remember_token');
+                    $table->unsignedBigInteger('type_id')->default(1)->after('remember_token');
                     $table->foreign('type_id')->references('id')->on('user_type')->onDelete('cascade');
                 }
                 if (! Schema::hasColumn('users', 'is_test')) {
