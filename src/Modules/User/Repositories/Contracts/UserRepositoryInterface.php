@@ -1,6 +1,6 @@
 <?php
 
-namespace WeeWorxxSDK\SharedResources\src\Modules\User\Repositories\Contracts;
+namespace WeeWorxxSDK\SharedResources\Modules\User\Repositories\Contracts;
 
 interface UserRepositoryInterface
 {

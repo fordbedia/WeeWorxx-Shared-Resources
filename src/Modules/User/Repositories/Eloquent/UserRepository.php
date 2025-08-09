@@ -1,11 +1,12 @@
 <?php
 
-namespace WeeWorxxSDK\SharedResources\src\Modules\User\Repositories\Eloquent;
+namespace WeeWorxxSDK\SharedResources\Modules\User\Repositories\Eloquent;
 
 use Illuminate\Database\Eloquent\Model;
 use WeeWorxxSDK\SharedResources\Modules\User\Models\User;
-use WeeWorxxSDK\SharedResources\src\Modules\User\Repositories\BaseRepository;
-use WeeWorxxSDK\SharedResources\src\Modules\User\Repositories\Contracts\UserRepositoryInterface;
+use WeeWorxxSDK\SharedResources\Modules\User\Repositories\BaseRepository;
+use WeeWorxxSDK\SharedResources\Modules\User\Repositories\Contracts\UserRepositoryInterface;
+use WeeWorxxSDK\SharedResources\SDK\Exception\RepositoryException;
 
 class UserRepository extends BaseRepository implements UserRepositoryInterface
 {
@@ -26,5 +27,16 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
 
         // You can chain more: ->where('type', 'admin')->orderBy('name')
         return parent::paginate($query, $perPage, $columns, $pageName, $page);
+    }
+
+    /**
+     * @throws RepositoryException
+     */
+    public function create(array $data): User
+    {
+        if ($this->isExists('email', $data['email'])) {
+            throw new RepositoryException('User already exists.', 503);
+        }
+        return $this->model->create(array_merge($data, ['password' => bcrypt($data['password'])]));
     }
 }

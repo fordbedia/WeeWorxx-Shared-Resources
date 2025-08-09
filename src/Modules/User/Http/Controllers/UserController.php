@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use WeeWorxxSDK\SharedResources\Modules\User\OAuth\OAuthContract;
+use WeeWorxxSDK\SharedResources\Modules\User\Repositories\Contracts\UserRepositoryInterface;
 
 class UserController extends Controller
 {
@@ -20,9 +21,20 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, UserRepositoryInterface $repository)
     {
-        //
+        try {
+            $repository->create($request->all());
+        } catch (\Throwable $exception) {
+            return response()->json([
+                'success' => false,
+                'message' => $exception->getMessage()
+            ]);
+        }
+
+        return response()->json([
+            'success' => true,
+        ]);
     }
 
     /**

@@ -1,8 +1,8 @@
 <?php
 
-namespace WeeWorxxSDK\SharedResources\src\Modules\User\Repositories;
+namespace WeeWorxxSDK\SharedResources\Modules\User\Repositories;
 
-use WeeWorxxSDK\SharedResources\src\SDK\Database\RepositoryLayer;
+use WeeWorxxSDK\SharedResources\SDK\Database\RepositoryLayer;
 
 abstract class BaseRepository extends RepositoryLayer
 {

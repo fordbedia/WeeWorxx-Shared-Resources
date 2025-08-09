@@ -24,7 +24,12 @@ class User extends Authenticatable implements OAuthenticatable
      * @var list<string>
      */
     protected $fillable = [
+        'fname',
+        'lname',
+        'mname',
         'name',
+        'stripe_customer_id',
+        'type_id',
         'email',
         'password',
     ];
@@ -48,7 +53,6 @@ class User extends Authenticatable implements OAuthenticatable
     {
         return [
             'email_verified_at' => 'datetime',
-            'password' => 'hashed',
         ];
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace WeeWorxxSDK\SharedResources\src\SDK\Database;
+namespace WeeWorxxSDK\SharedResources\SDK\Database;
 
 use http\Exception\RuntimeException;
 use Illuminate\Database\Eloquent\Model;
@@ -9,7 +9,7 @@ abstract class RepositoryLayer
 {
     protected Model $model;
     
-    public function __construct(protected self $repository)
+    public function __construct()
     {
         $this->resolver();
     }
@@ -38,8 +38,6 @@ abstract class RepositoryLayer
     {
         $model = $this->model->where($field, $value)->first();
 
-        $this->repository = $this;
-
         return $model;
     }
 
@@ -52,5 +50,15 @@ abstract class RepositoryLayer
     ) {
         $query = $query ?: $this->model->newQuery();
         return $query->paginate($perPage, $columns, $pageName, $page);
+    }
+
+    public function create(array $data): Model
+    {
+        return $this->model->create($data);
+    }
+
+    public function isExists(string $field, string $value): bool
+    {
+        return $this->model->where($field, $value)->exists();
     }
 }
