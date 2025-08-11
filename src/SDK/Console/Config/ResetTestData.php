@@ -28,7 +28,6 @@ class ResetTestData extends ModularResetTestDataCommand
         return [
             UserTypeSeeder::class,
             PostStatusesSeeder::class,
-            CompanySeeder::class,
             PostSeeder::class,
             UserSeeder::class,
         ];

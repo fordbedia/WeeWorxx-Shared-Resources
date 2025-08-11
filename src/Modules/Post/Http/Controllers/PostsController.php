@@ -10,7 +10,6 @@ use WeeWorxxSDK\SharedResources\Modules\Post\Models\Post;
 class PostsController extends Controller
 {
     protected array $relationships = [
-        'company',
         'postedBy',
         'status',
         'skills',

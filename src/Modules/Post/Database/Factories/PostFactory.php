@@ -37,7 +37,7 @@ class PostFactory extends Factory
             ->implode("<br /><br />"); // join them with paragraph spacing
         return [
             'posted_by' => rand(1, 50),
-            'company_id' => rand(1, 50),
+            'company_name' => $this->faker->company(),
             'post_status_id' => rand(1, 5),
             'employment_type' => $jobType[rand(0, 2)],
             'salary' => $this->faker->randomDigit(),

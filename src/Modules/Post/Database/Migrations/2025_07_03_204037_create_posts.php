@@ -15,8 +15,8 @@ return new class extends Migration
             Schema::create('posts', function (Blueprint $table) {
                 $table->id();
                 $table->unsignedBigInteger('posted_by');
-                $table->unsignedBigInteger('company_id');
                 $table->unsignedBigInteger('post_status_id');
+                $table->string('company_name')->nullable();
                 $table->string('permalink')->unique()->default('');
                 $table->string('salary')->nullable();
                 $table->text('job_url');
@@ -31,8 +31,6 @@ return new class extends Migration
                 $table->index('permalink');
                 $table->foreign('posted_by')
                     ->references('id')->on('posts')->onDelete('cascade');
-                $table->foreign('company_id')
-                    ->references('id')->on('company')->onDelete('cascade');
                 $table->foreign('post_status_id')
                     ->references('id')->on('post_statuses')->onDelete('cascade');
             });
