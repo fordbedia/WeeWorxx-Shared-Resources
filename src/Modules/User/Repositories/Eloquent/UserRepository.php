@@ -35,7 +35,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     public function create(array $data): User
     {
         if ($this->isExists('email', $data['email'])) {
-            throw new RepositoryException('User already exists.', 503);
+            throw new RepositoryException('User already exists. Please create another account.', 400);
         }
         return $this->model->create(array_merge($data, ['password' => bcrypt($data['password'])]));
     }

@@ -31,6 +31,7 @@ class UserFactory extends Factory
             'password' => bcrypt('12345'),
             'remember_token' => null,
             'type_id' => rand(1,2),
+            'auth_type' => 'app',
             'is_test' => 1,
         ];
     }

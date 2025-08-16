@@ -4,6 +4,7 @@ namespace WeeWorxxSDK\SharedResources\Modules\User\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use WeeWorxxSDK\SharedResources\Modules\User\OAuth\OAuthContract;
 use WeeWorxxSDK\SharedResources\Modules\User\Repositories\Contracts\UserRepositoryInterface;
@@ -24,12 +25,9 @@ class UserController extends Controller
     public function store(Request $request, UserRepositoryInterface $repository)
     {
         try {
-            $repository->create($request->all());
+            $repository->create(array_merge($request->all(), ['auth_type' => 'app']));
         } catch (\Throwable $exception) {
-            return response()->json([
-                'success' => false,
-                'message' => $exception->getMessage()
-            ]);
+            return throw new HttpException($exception->getCode(), $exception->getMessage());
         }
 
         return response()->json([
@@ -68,5 +66,10 @@ class UserController extends Controller
         } catch (\Throwable $e) {
             throw new HttpException(500, 'Cannot login, please check your email and password.');
         }
+    }
+
+    public function verifyByToken(Request $request)
+    {
+        return $request->user();
     }
 }

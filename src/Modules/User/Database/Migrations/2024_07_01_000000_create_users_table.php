@@ -17,7 +17,12 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('stripe_customer_id')->nullable();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('password')->nullable();
+            $table->string('google_id')->nullable()->index();
+            $table->string('github_id')->nullable()->index();
+            $table->string('linkedin_id')->nullable()->index();
+            $table->string('auth_type');
+            $table->text('avatar')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

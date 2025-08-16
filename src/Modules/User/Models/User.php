@@ -30,6 +30,8 @@ class User extends Authenticatable implements OAuthenticatable
         'name',
         'stripe_customer_id',
         'type_id',
+        'google_id',
+        'auth_type',
         'email',
         'password',
     ];

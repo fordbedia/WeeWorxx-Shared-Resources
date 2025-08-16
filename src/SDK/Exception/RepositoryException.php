@@ -18,6 +18,12 @@ class RepositoryException extends Exception
 
     public function render($request)
     {
-        return response($this->message, $this->status)->header('Content-Type', 'text/html');
+        $response = [
+            'message' => $this->getMessage(),
+            'status' => $this->status,
+            'trace' => $this->getTrace(),
+        ];
+
+        return response()->json($response, $this->status)->header('Content-Type', 'text/html');
     }
 }
