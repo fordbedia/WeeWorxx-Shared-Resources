@@ -52,7 +52,7 @@ abstract class RepositoryLayer
         return $query->paginate($perPage, $columns, $pageName, $page);
     }
 
-    public function create(array $data): Model
+    public function create(array $data): Model|array
     {
         return $this->model->create($data);
     }

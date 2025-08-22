@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use WeeWorxxSDK\SharedResources\Modules\Post\Database\Factories\PostFactory;
 use WeeWorxxSDK\SharedResources\Modules\User\Models\User;
+use WeeWorxxSDK\SharedResources\Modules\User\Traits\PostValidity;
 
 class Post extends Model
 {
-    use HasFactory;
+    use HasFactory, PostValidity;
 
     protected $table = 'posts';
     protected $guarded = [];

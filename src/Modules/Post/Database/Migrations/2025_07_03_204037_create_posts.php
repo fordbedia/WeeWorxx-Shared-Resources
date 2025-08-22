@@ -20,7 +20,7 @@ return new class extends Migration
                 $table->string('permalink')->unique()->default('');
                 $table->string('salary')->nullable();
                 $table->text('job_url');
-                $table->enum('employment_type', ['full_time', 'part_time', 'contract']);
+                $table->string('employment_type');
                 $table->string('job_location');
                 $table->string('title');
                 $table->longText('content');
@@ -30,7 +30,7 @@ return new class extends Migration
 
                 $table->index('permalink');
                 $table->foreign('posted_by')
-                    ->references('id')->on('posts')->onDelete('cascade');
+                    ->references('id')->on('users')->onDelete('cascade');
                 $table->foreign('post_status_id')
                     ->references('id')->on('post_statuses')->onDelete('cascade');
             });

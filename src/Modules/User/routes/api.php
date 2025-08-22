@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use WeeWorxxSDK\SharedResources\Modules\User\Http\Controllers\BookmarkController;
 use WeeWorxxSDK\SharedResources\Modules\User\Http\Controllers\SocialController;
 use WeeWorxxSDK\SharedResources\Modules\User\Http\Controllers\UserController;
+use WeeWorxxSDK\SharedResources\Modules\User\Http\Controllers\UserPostController;
 
 Route::group([
     'prefix'    => 'v1',
@@ -15,6 +16,9 @@ Route::group([
     Route::group(['prefix' => '/', 'middleware' => 'auth:api'], function() {
         Route::get('users/verify-by-token', [UserController::class, 'verifyByToken']);
         Route::resource('bookmark', BookmarkController::class);
+        Route::group(['prefix' => 'users'], function(){
+            Route::resource('checkout-post', UserPostController::class);
+        });
     });
     Route::resource('users', UserController::class);
 });
