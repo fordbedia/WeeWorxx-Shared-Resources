@@ -4,10 +4,13 @@ namespace WeeWorxxSDK\SharedResources\Modules\User\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use WeeWorxxSDK\SharedResources\Modules\Post\Models\Post;
 use WeeWorxxSDK\SharedResources\Modules\Post\Models\UserPostBookmark;
+use WeeWorxxSDK\SharedResources\Modules\User\Traits\PostRelation;
 
 class BookmarkController extends Controller
 {
+	use PostRelation;
     /**
      * Display a listing of the resource.
      */
@@ -21,12 +24,19 @@ class BookmarkController extends Controller
      */
     public function store(Request $request)
     {
-        $request->user()->bookmarks()->attach([$request->post_id]);
+			$userHasPost = $request->user()->bookmarks()->where('post_id', $request->post_id)->exists();
+			if ($userHasPost) {
+				$request->user()->bookmarks()->detach([$request->post_id]);
+			} else {
+				$request->user()->bookmarks()->attach([$request->post_id]);
+			}
 
-        return response()->json([
-           'post_id' => $request->post_id,
-            'user_id' => $request->user()->id
-        ]);
+			return response()->json([
+				'post_id' => $request->post_id,
+				'user_id' => $request->user()->id,
+				'bookmarked' => !$userHasPost,
+				'post' => Post::find($request->post_id)->loadMissing($this->postRelation)
+			]);
     }
 
     /**
