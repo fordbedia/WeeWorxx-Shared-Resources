@@ -28,9 +28,9 @@ class PostService implements PostServicesInterface
 		DB::beginTransaction();
 		try {
 			if (is_array($data)) {
-				$this->createFromArray($data);
+				return $this->createFromArray($data);
 			} else if ($data instanceof Model) {
-				$this->createFromModel($data);
+				return $this->createFromModel($data);
 			}
 		} catch (\Throwable $exception) {
 			DB::rollBack();
@@ -65,15 +65,20 @@ class PostService implements PostServicesInterface
 		// ============================================================
 		$createdBenefits = $this->benefitsRepository->create($benefits);
 		$post->benefits()->sync($createdBenefits);
+
 		DB::commit();
+
+		return $post;
 	}
 
 	/**
 	 * @param Post $post
 	 * @return void
 	 */
-	public function createFromModel(Post $post)
+	public function createFromModel(Post $post): bool
 	{
-		// DB::commit();
+		 DB::commit();
+
+		 return true;
 	}
 }

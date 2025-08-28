@@ -24,10 +24,12 @@ class UserPostController extends Controller
         Request $request,
         PostServicesInterface $postServices
     ) {
-			$postServices->create($request->all());
+			$post = $postServices->create($request->all());
 
 			return response()->json([
 				'message' => 'success',
+				'post' => $post,
+				'id' => $post->id
 			]);
     }
 
