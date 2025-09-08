@@ -3,6 +3,7 @@
 namespace WeeWorxxSDK\SharedResources\Modules\Post\Search\Engines;
 
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use ReflectionClass;
 use WeeWorxxSDK\SharedResources\Modules\Post\DTO\PostSearchCriteria;
@@ -19,6 +20,8 @@ class SqlPostSearchEngine implements PostSearchEngine
 	protected string $defaultTable = 'posts';
 
 	protected string $connection = 'weeworx';
+
+	protected ?bool $hasSearchTestPost = null;
 
 	public function __construct()
 	{
@@ -39,6 +42,8 @@ class SqlPostSearchEngine implements PostSearchEngine
 		if (empty($classKeywords)) {
 			abort(400, 'Something went wrong with the search criteria.');
 		}
+
+		$this->hasSearchTestPost = $criteria->getTest();
 
 		foreach($classKeywords as $index => $classKeyword) {
 			if (!isset($searchIntances[$classKeyword])){
@@ -77,6 +82,7 @@ class SqlPostSearchEngine implements PostSearchEngine
 	public function build(): string
 	{
 		$this->query = "SELECT $this->connection.posts.* FROM {$this->connection}.{$this->defaultTable} ";
+
 		$joins = collect();
 		$where = collect();
 		foreach($this->getQueryDataSet() as $key => $types) {
@@ -101,7 +107,19 @@ class SqlPostSearchEngine implements PostSearchEngine
 		// ----------------------------------------------------------------------------
 		// Concatenate the where clauses' arguments
 		// ----------------------------------------------------------------------------
-		$this->query = $this->query . " WHERE " . $where->implode(' ') . " GROUP BY posts.id";
+		$this->query = $this->query . " WHERE " . $where->implode(' ');
+
+		// ----------------------------------------------------------------------------
+		// Guard this feature so test posts can only accessible by authenticated users
+		// ----------------------------------------------------------------------------
+		if (Auth::user()) {
+			$isTestValue = (int) $this->hasSearchTestPost;
+			$this->query = $this->query . " AND posts.is_test = {$isTestValue}";
+		}
+
+		$lastStatementClauses = " GROUP BY posts.id ORDER BY posts.title DESC";
+
+		$this->query = $this->query . $lastStatementClauses;
 
 		return $this->getQuery();
 	}
@@ -179,7 +197,7 @@ class SqlPostSearchEngine implements PostSearchEngine
 
 	protected function trimComparisonString($instance): string
 	{
-		if (preg_match('/^%(.+)%$/', $instance, $comparison)) {
+		if (preg_match('/^%?(.+?)%?$/', $instance, $comparison)) {
 			return $comparison[1];
 		}
 

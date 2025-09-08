@@ -11,7 +11,7 @@ final class PostSearchCriteria implements JsonSerializable
 	use PostSearchCriteriaTrait, AttributesCallable;
 
 	public function __construct(
-		protected readonly string $q,
+		protected readonly ?string $q,
 		protected readonly ?string $location,
 		protected readonly ?string $company,
 		protected readonly ?string $empType,

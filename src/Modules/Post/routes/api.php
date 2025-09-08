@@ -8,6 +8,6 @@ Route::group([
     'prefix'    => 'v1',
     'middleware' => 'api'
 ], function () {
+		Route::get('/posts/search', [PostSearchController::class, 'search'])->middleware('auth.optional:api');;
     Route::resource('posts', PostsController::class);
-		Route::get('search', [PostSearchController::class, 'search']);
 });
