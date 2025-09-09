@@ -20,7 +20,9 @@ class PostSearch
 		$sql = $this->engine->constructQuery($criteria)
 			->build();
 
-		$paginator = PostRepository::sqlToEloquent($sql)->with($this->postRelation)->paginate(10)
+		$paginator = PostRepository::sqlToEloquent($sql)->with($this->postRelation)
+			->active()
+			->paginate(10)
 			->through(fn ($post) => (new SearchPostResource($post))->toArray(request()));
 
 		return array_merge($paginator->toArray(), [

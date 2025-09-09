@@ -2,9 +2,12 @@
 
 namespace WeeWorxxSDK\SharedResources\Modules\Post\Models;
 
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use WeeWorxxSDK\SharedResources\Modules\Post\Builders\PostBuilder;
 use WeeWorxxSDK\SharedResources\Modules\Post\Database\Factories\PostFactory;
 use WeeWorxxSDK\SharedResources\Modules\User\Models\User;
 use WeeWorxxSDK\SharedResources\Modules\User\Traits\PostValidity;
@@ -85,4 +88,9 @@ class Post extends Model
             'id'
         )->withTimestamps();
     }
+
+		public function newEloquentBuilder($query): PostBuilder
+		{
+			return new PostBuilder($query);
+		}
 }

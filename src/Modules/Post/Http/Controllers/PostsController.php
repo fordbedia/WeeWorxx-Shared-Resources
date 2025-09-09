@@ -21,7 +21,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        return Post::with($this->relationships)->paginate(10);
+        return Post::active()->with($this->relationships)->paginate(10);
     }
 
     /**
