@@ -97,7 +97,7 @@ class SqlPostSearchEngine implements PostSearchEngine
 		if ($where->isNotEmpty()) {
 			$first = $where->shift();
 			$where = collect([$first])
-				->concat($where->flatMap(fn ($v) => ['OR', $v]))->values();
+				->concat($where->flatMap(fn ($v) => ['AND', $v]))->values();
 		}
 
 		// ----------------------------------------------------------------------------
@@ -114,7 +114,7 @@ class SqlPostSearchEngine implements PostSearchEngine
 		// ----------------------------------------------------------------------------
 		if (Auth::user()) {
 			$isTestValue = (int) $this->hasSearchTestPost;
-			$this->query = $this->query . " AND posts.is_test = {$isTestValue}";
+			$this->query = $this->query . " AND (posts.is_test = {$isTestValue})";
 		}
 
 		$lastStatementClauses = " GROUP BY posts.id ORDER BY posts.title DESC";

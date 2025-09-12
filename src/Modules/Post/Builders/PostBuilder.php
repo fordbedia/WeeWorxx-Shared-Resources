@@ -19,7 +19,7 @@ class PostBuilder extends Builder
 		$query = $this;
 		if ($id !== null) {
 			// allow single id or array of ids
-			$query = $query->whereKey ($id);
+			$query = $query->whereKey($id);
 		}
 		return $query->update([
 			'valid_at' => now()->addDays($days),
